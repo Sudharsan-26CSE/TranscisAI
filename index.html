@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TranscisAI — Decoding Life. Empowering Genomics.</title>
+<meta name="description" content="TranscisAI delivers genomic sequencing platforms, library preparation automation, bioinformatics support and NGS assay solutions for India's research and diagnostic laboratories.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0A1A33;
+    --navy-800:#0E2A55;
+    --navy-700:#123667;
+    --teal-600:#0F8E82;
+    --teal-500:#159E90;
+    --teal-400:#3FBDAE;
+    --teal-100:#E3F5F2;
+    --bg:#F8FAF9;
+    --paper:#FFFFFF;
+    --ink:#132033;
+    --muted:#5A6C82;
+    --line:#E3E8ED;
+    --max:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;color:var(--navy-950);line-height:1.15;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--teal-600);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1.5px;background:var(--teal-500);display:inline-block;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 26px;border-radius:3px;
+    font-weight:600;font-size:15px;
+    cursor:pointer;border:1.5px solid transparent;
+    transition:all .2s ease;
+  }
+  .btn-primary{background:var(--navy-950);color:#fff;}
+  .btn-primary:hover{background:var(--teal-600);}
+  .btn-outline{border-color:var(--navy-950);color:var(--navy-950);}
+  .btn-outline:hover{background:var(--navy-950);color:#fff;}
+  .btn-outline-light{border-color:rgba(255,255,255,.5);color:#fff;}
+  .btn-outline-light:hover{background:#fff;color:var(--navy-950);}
+
+  /* ---------- helix rung divider (signature motif) ---------- */
+  .helix-rule{
+    display:flex;align-items:center;gap:6px;
+    height:14px;overflow:hidden;
+  }
+  .helix-rule span{
+    width:3px;background:var(--teal-400);
+    animation:none;
+  }
+  .helix-rule.static span{height:14px;opacity:.55;}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(248,250,249,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:var(--max);margin:0 auto;padding:14px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand img{height:42px;width:auto;}
+  .brand-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:.02em;color:var(--navy-950);}
+  .brand-tag{font-size:10.5px;color:var(--teal-600);letter-spacing:.04em;margin-top:-2px;}
+  nav ul{list-style:none;display:flex;gap:34px;align-items:center;}
+  nav ul li a{font-size:14.5px;font-weight:500;color:var(--navy-800);transition:color .15s;}
+  nav ul li a:hover{color:var(--teal-600);}
+  .nav-cta{display:flex;align-items:center;gap:18px;}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;}
+  .menu-toggle span{width:24px;height:2px;background:var(--navy-950);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:linear-gradient(180deg,#0A1A33 0%,#0E2A55 60%,#123667 100%);
+    color:#fff;padding:96px 0 90px;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;}
+  .hero h1{font-size:clamp(34px,4.6vw,54px);color:#fff;font-weight:700;letter-spacing:-.01em;}
+  .hero h1 em{font-style:normal;color:var(--teal-400);}
+  .hero p{margin-top:20px;font-size:17px;color:#C9D4E2;max-width:520px;}
+  .hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .hero-stats{display:flex;gap:38px;margin-top:52px;flex-wrap:wrap;}
+  .hero-stats div strong{display:block;font-family:'Space Grotesk',sans-serif;font-size:26px;color:#fff;}
+  .hero-stats div span{font-size:12.5px;color:#9FB0C6;letter-spacing:.03em;}
+
+  .helix-art{position:relative;height:420px;display:flex;align-items:center;justify-content:center;}
+  .helix-art svg{width:100%;height:100%;}
+
+  /* ---------- section basics ---------- */
+  section{padding:88px 0;}
+  .section-head{max-width:640px;margin-bottom:52px;}
+  .section-head h2{font-size:clamp(26px,3vw,36px);}
+  .section-head p{margin-top:14px;color:var(--muted);font-size:16px;}
+  .divider-band{padding:0;}
+  .divider-band .wrap{padding:22px 28px;}
+
+  /* ---------- about ---------- */
+  .about{background:var(--paper);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .about-copy p{color:var(--muted);margin-bottom:16px;font-size:15.5px;}
+  .about-copy p strong{color:var(--navy-950);}
+  .values{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .value-card{
+    border:1px solid var(--line);border-radius:6px;padding:22px 20px;
+    background:var(--bg);
+  }
+  .value-card .vi{
+    width:34px;height:34px;border-radius:6px;background:var(--teal-100);
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+    color:var(--teal-600);
+  }
+  .value-card h4{font-size:15.5px;margin-bottom:6px;}
+  .value-card p{font-size:13.5px;color:var(--muted);}
+
+  /* ---------- services ---------- */
+  .services{background:var(--navy-950);color:#fff;}
+  .services .section-head h2{color:#fff;}
+  .services .section-head p{color:#B8C4D6;}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden;}
+  .service-card{background:#0E2A55;padding:30px 26px;}
+  .service-card h4{color:#fff;font-size:16.5px;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  .service-card h4 .dot{width:7px;height:7px;border-radius:50%;background:var(--teal-400);flex-shrink:0;}
+  .service-card p{font-size:13.8px;color:#AEBBD0;}
+
+  /* ---------- products ---------- */
+  .products{background:var(--bg);}
+  .prod-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px;}
+  .prod-tabs button{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;
+    padding:9px 18px;border-radius:20px;border:1px solid var(--line);
+    background:#fff;color:var(--muted);cursor:pointer;transition:.15s;
+  }
+  .prod-tabs button.active,.prod-tabs button:hover{
+    background:var(--navy-950);color:#fff;border-color:var(--navy-950);
+  }
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .prod-panel{display:none;}
+  .prod-panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .prod-card{
+    background:#fff;border:1px solid var(--line);border-radius:8px;
+    padding:26px 22px;transition:.2s;
+  }
+  .prod-card:hover{border-color:var(--teal-400);transform:translateY(-3px);box-shadow:0 12px 28px rgba(15,142,130,.08);}
+  .prod-card .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal-600);letter-spacing:.05em;text-transform:uppercase;}
+  .prod-card h4{font-size:16px;margin:10px 0 8px;}
+  .prod-card p{font-size:13.5px;color:var(--muted);}
+
+  /* ---------- why ---------- */
+  .why{background:var(--paper);}
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .why-card{text-align:left;padding-top:18px;border-top:2px solid var(--teal-400);}
+  .why-card h4{font-size:16px;margin-bottom:8px;}
+  .why-card p{font-size:13.8px;color:var(--muted);}
+
+  /* ---------- contact ---------- */
+  .contact{background:linear-gradient(180deg,#0E2A55,#0A1A33);color:#fff;}
+  .contact .section-head h2{color:#fff;}
+  .contact .section-head p{color:#B8C4D6;}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+  .addr-list{display:flex;flex-direction:column;gap:22px;}
+  .addr-card{border-left:2px solid var(--teal-400);padding-left:18px;}
+  .addr-card h4{color:#fff;font-size:14px;letter-spacing:.03em;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;font-weight:500;margin-bottom:6px;}
+  .addr-card p{color:#C9D4E2;font-size:14.5px;}
+  .cform{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:30px;}
+  .cform label{font-size:12.5px;color:#B8C4D6;display:block;margin-bottom:6px;letter-spacing:.02em;}
+  .cform input,.cform textarea{
+    width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);
+    border-radius:5px;padding:11px 13px;color:#fff;font-family:'Inter',sans-serif;font-size:14px;
+    margin-bottom:16px;
+  }
+  .cform input::placeholder,.cform textarea::placeholder{color:#7C8CA6;}
+  .cform button{width:100%;justify-content:center;}
+  .email-link{color:var(--teal-400);font-weight:600;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--navy-950);color:#8CA0BC;padding:44px 0 26px;border-top:1px solid rgba(255,255,255,.08);}
+  .foot-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  .foot-brand{display:flex;align-items:center;gap:10px;}
+  .foot-brand img{height:30px;filter:brightness(0) invert(1);opacity:.9;}
+  .foot-brand span{font-family:'Space Grotesk',sans-serif;color:#fff;font-weight:600;}
+  .foot-links{display:flex;gap:26px;list-style:none;font-size:13.5px;}
+  .foot-bottom{margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .helix-art{height:280px;order:-1;}
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:36px;}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .prod-panel.active,.prod-grid{grid-template-columns:1fr 1fr;}
+    .why-grid{grid-template-columns:1fr 1fr;}
+    nav ul,.nav-cta .btn{display:none;}
+    .menu-toggle{display:flex;}
+    nav.open ul{
+      display:flex;position:absolute;top:100%;left:0;right:0;background:#fff;
+      flex-direction:column;padding:20px 28px;gap:18px;border-bottom:1px solid var(--line);
+    }
+  }
+  @media(max-width:600px){
+    .services-grid,.prod-panel.active,.prod-grid,.why-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:24px;}
+    section{padding:64px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav" id="navBar">
+    <div class="brand">
+      <img src="transcis-logo.png" alt="TranscisAI logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-primary">Get in Touch</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow" style="color:var(--teal-400)">Genomics · Sequencing · Bioinformatics</div>
+      <h1>Decoding Life. <br><em>Empowering Genomics.</em></h1>
+      <p>TranscisAI equips India's research and diagnostic laboratories with genomic sequencing platforms, library preparation automation, bioinformatics support and validated NGS assay solutions — built to take a lab from sample to insight.</p>
+      <div class="hero-ctas">
+        <a href="#products" class="btn btn-primary">Explore Our Platform</a>
+        <a href="#contact" class="btn btn-outline-light">Talk to Our Team</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>Long &amp; Short-Read</strong><span>SEQUENCING PLATFORMS</span></div>
+        <div><strong>NIPT · PGT-A · WES</strong><span>VALIDATED NGS ASSAYS</span></div>
+        <div><strong>End-to-End</strong><span>SAMPLE TO INSIGHT SUPPORT</span></div>
+      </div>
+    </div>
+    <div class="helix-art">
+      <svg viewBox="0 0 260 420" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="strandA" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3FBDAE"/>
+            <stop offset="1" stop-color="#0F8E82"/>
+          </linearGradient>
+          <linearGradient id="strandB" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#4A6FA8"/>
+            <stop offset="1" stop-color="#12386B"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round">
+          <path d="M60 10 C 160 60, 160 100, 60 150 S -40 240, 60 290 S 160 380, 60 410" stroke="url(#strandA)" stroke-width="7"/>
+          <path d="M200 10 C 100 60, 100 100, 200 150 S 300 240, 200 290 S 100 380, 200 410" stroke="url(#strandB)" stroke-width="7"/>
+          <g stroke="#7FA3C9" stroke-width="3" opacity=".55">
+            <line x1="72" y1="40" x2="188" y2="40"/>
+            <line x1="90" y1="80" x2="170" y2="80"/>
+            <line x1="90" y1="120" x2="170" y2="120"/>
+            <line x1="72" y1="160" x2="188" y2="160"/>
+            <line x1="50" y1="200" x2="210" y2="200"/>
+            <line x1="72" y1="240" x2="188" y2="240"/>
+            <line x1="90" y1="280" x2="170" y2="280"/>
+            <line x1="90" y1="320" x2="170" y2="320"/>
+            <line x1="72" y1="360" x2="188" y2="360"/>
+            <line x1="60" y1="395" x2="200" y2="395"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="section-head">
+        <div class="eyebrow">Our Story</div>
+        <h2>A genomics partner built for Indian research &amp; diagnostics</h2>
+      </div>
+      <div class="about-copy">
+        <p>TranscisAI was founded to close the gap between the pace of global genomics innovation and the infrastructure available to laboratories across India. We bring together sequencing hardware, automation, reagent science and bioinformatics under one roof, so labs spend less time integrating vendors and more time generating results.</p>
+        <p><strong>Our approach is consultative, not transactional.</strong> From planning a new sequencing core to validating an NGS panel for clinical use, our scientists work alongside yours — configuring platforms, tuning workflows and supporting data interpretation at every stage of the genomics pipeline.</p>
+        <p>We work with hospitals, diagnostic chains, research institutes and biotech start-ups, helping each one build a genomics capability that is accurate, scalable and financially sustainable.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="values">
+        <div class="value-card">
+          <div class="vi">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <h4>Precision</h4>
+          <p>Validated workflows and rigorous QC at every step, from extraction to reporting.</p>
+        </div>
+        <div class="value-card">
+          <div class="vi">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg>
+          </div>
+          <h4>Access</h4>
+          <p>Bringing advanced genomic infrastructure within reach of labs of every size.</p>
+        </div>
+        <div class="value-card">
+          <div class="vi">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-4a4 4 0 100-8 4 4 0 000 8zm6 4a4 4 0 10-8 0"/></svg>
+          </div>
+          <h4>Partnership</h4>
+          <p>Scientists working alongside your team, not just supplying equipment.</p>
+        </div>
+        <div class="value-card">
+          <div class="vi">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 11-14h-7l0-6z"/></svg>
+          </div>
+          <h4>Innovation</h4>
+          <p>Continuously evaluating new sequencing, automation and analysis technologies.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-band">
+  <div class="wrap"><div class="helix-rule static" id="ruleTop"></div></div>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">What We Do</div>
+      <h2>Services across the genomics lifecycle</h2>
+      <p>From laboratory design to final report, we support each stage of building and running a genomics operation.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <h4><span class="dot"></span>Genomic Lab Setup &amp; Design</h4>
+        <p>End-to-end laboratory planning — layout, workflow mapping and contamination-control zoning for a compliance-ready facility.</p>
+      </div>
+      <div class="service-card">
+        <h4><span class="dot"></span>Equipment &amp; Automation Sourcing</h4>
+        <p>Vendor-neutral guidance on sequencers, library prep automation and lab accessories, matched to your throughput and budget.</p>
+      </div>
+      <div class="service-card">
+        <h4><span class="dot"></span>Bioinformatics &amp; Data Analysis</h4>
+        <p>Raw data processing, variant calling, annotation and clinical interpretation support with fast turnaround.</p>
+      </div>
+      <div class="service-card">
+        <h4><span class="dot"></span>NGS Consultancy &amp; Validation</h4>
+        <p>Assay design, panel validation and post-analysis support for research and clinical NGS programmes.</p>
+      </div>
+      <div class="service-card">
+        <h4><span class="dot"></span>CAPEX &amp; Scale-Up Planning</h4>
+        <p>Investment planning that prioritises essential instruments and phases expansion for a faster return.</p>
+      </div>
+      <div class="service-card">
+        <h4><span class="dot"></span>Sample &amp; Data Banking</h4>
+        <p>Secure biosample and genomic data storage, with retrieval workflows built for long-term research use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Our Platform</div>
+      <h2>Products for every stage of the genomics workflow</h2>
+      <p>Sequencing hardware, automation, assays and biobanking — sourced, configured and supported by our team.</p>
+    </div>
+
+    <div class="prod-tabs reveal" id="prodTabs">
+      <button class="active" data-tab="platforms">Sequencing &amp; Automation</button>
+      <button data-tab="assays">NGS Kit Assays</button>
+      <button data-tab="banking">Biobanking</button>
+    </div>
+
+    <div class="prod-panel active reveal" data-panel="platforms">
+      <div class="prod-card">
+        <div class="tag">Sequencer</div>
+        <h4>Long-Read Sequencing</h4>
+        <p>Platforms for structural variant detection, full-length transcripts and complex genomic regions.</p>
+      </div>
+      <div class="prod-card">
+        <div class="tag">Sequencer</div>
+        <h4>Short-Read Sequencing</h4>
+        <p>High-throughput, high-accuracy sequencing for germline, somatic and targeted panel work.</p>
+      </div>
+      <div class="prod-card">
+        <div class="tag">Automation</div>
+        <h4>Library Preparation Automation</h4>
+        <p>Automated systems that standardise library prep, reduce hands-on time and improve run-to-run consistency.</p>
+      </div>
+      <div class="prod-card">
+        <div class="tag">Analysis</div>
+        <h4>Bioinformatics Analysis Support</h4>
+        <p>Pipeline execution, variant annotation and interpretation support layered on top of your sequencing data.</p>
+      </div>
+      <div class="prod-card">
+        <div class="tag">Omics</div>
+        <h4>Proteomics Solutions</h4>
+        <p>Protein-level profiling tools to complement genomic and transcriptomic findings.</p>
+      </div>
+      <div class="prod-card">
+        <div class="tag">Omics</div>
+        <h4>Transcriptome Analysis</h4>
+        <p>RNA sequencing and expression profiling for research into gene regulation and disease mechanism.</p>
+      </div>
+    </div>
+
+    <div class="prod-panel" data-panel="assays">
+      <div class="prod-card"><div class="tag">Reproductive Health</div><h4>NIPT</h4><p>Non-invasive prenatal testing assays for chromosomal screening.</p></div>
+      <div class="prod-card"><div class="tag">Reproductive Health</div><h4>PGT-A</h4><p>Preimplantation genetic testing for aneuploidy screening in IVF workflows.</p></div>
+      <div class="prod-card"><div class="tag">Clinical Genomics</div><h4>Whole Exome Sequencing (WES)</h4><p>Exome-wide variant detection for rare disease and clinical research applications.</p></div>
+      <div class="prod-card"><div class="tag">Microbiology</div><h4>16S rDNA Sequencing</h4><p>Microbial identification and community profiling assays.</p></div>
+      <div class="prod-card"><div class="tag">Oncology</div><h4>Oncology Panels</h4><p>Targeted and comprehensive panels for tumour profiling and biomarker discovery.</p></div>
+      <div class="prod-card"><div class="tag">Omics</div><h4>Proteomics &amp; Transcriptome Kits</h4><p>Assay kits supporting protein and RNA-level analysis alongside genomic data.</p></div>
+    </div>
+
+    <div class="prod-panel" data-panel="banking">
+      <div class="prod-card"><div class="tag">Biobanking</div><h4>Bio Sample Bank</h4><p>Secure, temperature-controlled storage for biological specimens with tracked chain of custody.</p></div>
+      <div class="prod-card"><div class="tag">Biobanking</div><h4>Bio Data Bank</h4><p>Structured, access-controlled storage for genomic and clinical datasets.</p></div>
+      <div class="prod-card"><div class="tag">Collection</div><h4>Cell-Free DNA Collection Tubes</h4><p>Stabilisation tubes designed to preserve cfDNA integrity from collection through processing.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-band" style="background:var(--paper)">
+  <div class="wrap"><div class="helix-rule static"></div></div>
+</div>
+
+<!-- ============ WHY US ============ -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Why TranscisAI</div>
+      <h2>What sets our support apart</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <h4>One partner, full pipeline</h4>
+        <p>Sequencing, automation, assays and analysis from a single, accountable team.</p>
+      </div>
+      <div class="why-card">
+        <h4>Vendor-neutral guidance</h4>
+        <p>Recommendations matched to your lab's throughput and budget, not a single brand.</p>
+      </div>
+      <div class="why-card">
+        <h4>Scientists on call</h4>
+        <p>Direct access to our bioinformatics and applications team, not a ticketing queue.</p>
+      </div>
+      <div class="why-card">
+        <h4>India-based support</h4>
+        <p>Local warehousing and service coverage across the NCR region and beyond.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="section-head">
+        <div class="eyebrow">Get In Touch</div>
+        <h2>Let's talk about your lab's next step</h2>
+        <p>Reach out for platform demos, assay validation support or a lab set-up consultation.</p>
+      </div>
+      <div class="addr-list">
+        <div class="addr-card">
+          <h4>Registered Address</h4>
+          <p>Gaur Yamuna City, Greater Noida, Uttar Pradesh — 203201</p>
+        </div>
+        <div class="addr-card">
+          <h4>Communication Address</h4>
+          <p>B-161, Ground Floor, Sector 36, Noida, Uttar Pradesh — 201301</p>
+        </div>
+        <div class="addr-card">
+          <h4>Warehouse</h4>
+          <p>Ghaziabad, Uttar Pradesh</p>
+        </div>
+        <div class="addr-card">
+          <h4>Email</h4>
+          <p><a class="email-link" href="mailto:director@transcisai.com">director@transcisai.com</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="cform" onsubmit="event.preventDefault(); this.querySelector('.formMsg').style.display='block';">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your name" required>
+        <label>Email</label>
+        <input type="email" placeholder="you@lab.com" required>
+        <label>Organisation</label>
+        <input type="text" placeholder="Hospital, lab or institute">
+        <label>Message</label>
+        <textarea rows="4" placeholder="Tell us about your requirement"></textarea>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p class="formMsg" style="display:none;margin-top:12px;font-size:13px;color:var(--teal-400);">Thanks — connect this form to your email service to receive submissions.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="transcis-logo.png" alt="TranscisAI">
+      </div>
+      <ul class="foot-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 TranscisAI. All rights reserved.</span>
+      <span>Decoding Life. Empowering Genomics.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile menu
+  const toggle=document.getElementById('menuToggle');
+  const navBar=document.getElementById('navBar');
+  toggle.addEventListener('click',()=>navBar.classList.toggle('open'));
+
+  // product tabs
+  document.querySelectorAll('#prodTabs button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#prodTabs button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.prod-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector(`.prod-panel[data-panel="${btn.dataset.tab}"]`).classList.add('active');
+    });
+  });
+
+  // scroll reveal
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // helix rule build (rung heights mimic DNA ladder)
+  document.querySelectorAll('.helix-rule.static').forEach(rule=>{
+    const heights=[6,10,14,10,6,4,6,10,14,10,6,4,6,10,14,10,6,4,6,10,14,10,6,4,6,10,14,10,6,4];
+    heights.forEach(h=>{
+      const s=document.createElement('span');
+      s.style.height=h+'px';
+      rule.appendChild(s);
+    });
+  });
+</script>
+</body>
+</html>
